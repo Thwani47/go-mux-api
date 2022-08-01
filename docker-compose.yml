@@ -1,0 +1,31 @@
+version: '3'
+services:
+  api:
+    image: api
+    container_name: mux-api
+    build:
+      context: .
+      dockerfile: Dockerfile
+    restart: always
+    deploy:
+      mode: replicated
+      replicas: 1
+    ports:
+      - "8001:8001"
+    depends_on:
+      - postgres
+
+  postgres:
+    image: postgres:14.4-alpine
+    ports:
+      - "5432:5432"
+    restart: always
+    deploy:
+      mode: replicated
+      replicas: 1
+    environment:
+      POSTGRES_USER: postgres
+      POSTGRES_PASSWORD: password
+      POSTGRES_DB: products
+    volumes:
+      - ./db-data/postgres:/var/lib/postgresql/data
