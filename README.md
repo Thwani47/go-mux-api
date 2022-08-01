@@ -2,8 +2,8 @@
 REST API written in Go and Gorilla Mux
 
 ## Run locally
-```bash
-$ docker-compose up -d
+```shell
+$> docker-compose up -d
 ```
 API should be running at http://localhost:8001
 
